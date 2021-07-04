@@ -42,8 +42,7 @@ namespace nil {
     namespace crypto3 {
         namespace zk {
             namespace snark {
-                template<typename CurveType = ::nil::crypto3::algebra::curves::bls12_381,
-                         typename Hash = ::nil::crypto3::hashes::sha2<256>>
+                template<typename CurveType = algebra::curves::bls12_381, typename Hash = hashes::sha2<256>>
                 struct transcript {
                     typedef CurveType curve_type;
                     typedef Hash hash_type;
@@ -51,7 +50,7 @@ namespace nil {
                     typedef marshalling::curve_bincode<curve_type> bincode;
 
                     std::vector<std::uint8_t> buffer;
-                    ::nil::crypto3::accumulator_set<Hash> hasher_acc;
+                    accumulator_set<Hash> hasher_acc;
 
                     template<
                         typename InputIterator,

@@ -61,8 +61,8 @@
 
 #include <memory>
 
-#include <nil/crypto3/zk/snark/commitments/knowledge_commitment.hpp>
-#include <nil/crypto3/zk/snark/commitments/knowledge_commitment_multiexp.hpp>
+#include <nil/crypto3/zk/snark/commitments/kc.hpp>
+#include <nil/crypto3/zk/snark/commitments/kc_multiexp.hpp>
 
 #include <nil/crypto3/zk/snark/relations/constraint_satisfaction_problems/r1cs.hpp>
 

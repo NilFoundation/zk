@@ -69,7 +69,7 @@
 #include <nil/crypto3/zk/snark/relations/constraint_satisfaction_problems/r1cs.hpp>
 #include <nil/crypto3/zk/snark/relations/variable.hpp>
 #include <nil/crypto3/zk/snark/commitments/detail/element_knowledge_commitment.hpp>
-#include <nil/crypto3/zk/snark/commitments/knowledge_commitment.hpp>
+#include <nil/crypto3/zk/snark/commitments/kc.hpp>
 
 #include <nil/crypto3/algebra/curves/bls12.hpp>
 #include <nil/crypto3/algebra/fields/bls12/base_field.hpp>

@@ -168,7 +168,7 @@ namespace nil {
                     }
 
                     std::size_t size_in_bits() const {
-                        return indices.size() * (sizeof(std::size_t) * 8 + Type::value_bits);
+                        return indices.size() * (sizeof(std::size_t) * CHAR_BIT + Type::value_bits);
                     }
 
                     /* return a pair consisting of the accumulated value and the sparse vector of non-accumulated values

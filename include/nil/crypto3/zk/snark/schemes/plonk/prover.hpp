@@ -23,27 +23,10 @@
 // SOFTWARE.
 //---------------------------------------------------------------------------//
 
-#ifndef CRYPTO3_ZK_R1CS_GG_PPZKSNARK_BASIC_PROVER_HPP
-#define CRYPTO3_ZK_R1CS_GG_PPZKSNARK_BASIC_PROVER_HPP
+#ifndef CRYPTO3_ZK_PLONK_PROVER_HPP
+#define CRYPTO3_ZK_PLONK_PROVER_HPP
 
 #include <memory>
-
-#include <nil/crypto3/zk/snark/commitments/kc.hpp>
-#include <nil/crypto3/zk/snark/relations/constraint_satisfaction_problems/r1cs.hpp>
-
-#include <nil/crypto3/algebra/multiexp/multiexp.hpp>
-#include <nil/crypto3/algebra/multiexp/policies.hpp>
-
-#include <nil/crypto3/algebra/random_element.hpp>
-
-#ifdef MULTICORE
-#include <omp.h>
-#endif
-
-#include <nil/crypto3/zk/snark/commitments/kc_multiexp.hpp>
-#include <nil/crypto3/zk/snark/reductions/r1cs_to_qap.hpp>
-
-#include <nil/crypto3/zk/snark/schemes/ppzksnark/r1cs_gg_ppzksnark/detail/basic_policy.hpp>
 
 namespace nil {
     namespace crypto3 {
@@ -59,7 +42,7 @@ namespace nil {
                  * Above, CS is the R1CS constraint system that was given as input to the generator algorithm.
                  */
                 template<typename CurveType>
-                class r1cs_gg_ppzksnark_prover {
+                class plonk_prover {
                     typedef detail::r1cs_gg_ppzksnark_basic_policy<CurveType, ProvingMode::Basic> policy_type;
 
                     typedef typename CurveType::scalar_field_type scalar_field_type;

@@ -26,7 +26,7 @@
 #ifndef CRYPTO3_R1CS_PPZKSNARK_PROOF_HPP
 #define CRYPTO3_R1CS_PPZKSNARK_PROOF_HPP
 
-#include <nil/crypto3/zk/snark/commitments/knowledge_commitment.hpp>
+#include <nil/crypto3/zk/snark/commitments/kc.hpp>
 
 namespace nil {
     namespace crypto3 {

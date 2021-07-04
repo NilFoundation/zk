@@ -66,7 +66,8 @@ set(TESTS_NAMES
     "schemes/ppzksnark/ram_ppzksnark/ram_ppzksnark"
     "schemes/ppzksnark/tbcs_ppzksnark/tbcs_ppzksnark"
     "schemes/ppzksnark/uscs_ppzksnark/uscs_ppzksnark"
-    "schemes/ppzksnark/r1cs_gg_ppzksnark/r1cs_gg_ppzksnark_aggregation_conformity")
+    "schemes/ppzksnark/r1cs_gg_ppzksnark/r1cs_gg_ppzksnark_aggregation_conformity"
+    "schemes/plonk/prover")
 
 foreach(TEST_NAME ${TESTS_NAMES})
     define_zk_test(${TEST_NAME})

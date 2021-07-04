@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------//
 // Copyright (c) 2018-2021 Mikhail Komarov <nemo@nil.foundation>
 // Copyright (c) 2020-2021 Nikita Kaskov <nbering@nil.foundation>
+// Copyright (c) 2020-2021 Ilias Khairullin <ilias@nil.foundation>
 //
 // MIT License
 //
@@ -23,48 +24,29 @@
 // SOFTWARE.
 //---------------------------------------------------------------------------//
 
-#ifndef CRYPTO3_ZK_KNOWLEDGE_COMMITMENT_HPP
-#define CRYPTO3_ZK_KNOWLEDGE_COMMITMENT_HPP
+#ifndef CRYPTO3_PLONK_VERIFICATION_KEY_HPP
+#define CRYPTO3_PLONK_VERIFICATION_KEY_HPP
 
-#include <nil/crypto3/zk/snark/commitments/detail/element_knowledge_commitment.hpp>
-
-#include <nil/crypto3/zk/snark/sparse_vector.hpp>
+#include <memory>
 
 namespace nil {
     namespace crypto3 {
         namespace zk {
             namespace snark {
+                template<typename CurveType>
+                struct plonk_verification_key {
+                    typedef CurveType curve_type;
+                    typedef typename curve_type::g1_type::value_type g1_value_type;
 
-                /********************** Knowledge commitment *********************************/
-
-                /**
-                 * A knowledge commitment element is a pair (g,h) where g is in Type1 and h in Type2,
-                 * and Type1 and Type2 are groups (written additively).
-                 *
-                 * Such pairs form a group by defining:
-                 * - "zero" = (0,0)
-                 * - "one" = (1,1)
-                 * - a * (g,h) + b * (g',h') := ( a * g + b * g', a * h + b * h').
-                 */
-                template<typename Type1, typename Type2>
-                struct knowledge_commitment {
-
-                    typedef detail::element_kc<Type1, Type2> value_type;
-
-                    constexpr static const std::size_t value_bits = Type1::value_bits + Type2::value_bits;
+                    std::size_t n, num_public_inputs;
+                    std::map<std::string, g1_value_type> constraint_selectors;
+                    std::map<std::string, g1_value_type> permutation_selectors;
+                    bool contains_recursive_proof = false;
+                    std::vector<uint32_t> recursive_proof_public_input_indices;
                 };
-
-                /******************** Knowledge commitment vector ****************************/
-
-                /**
-                 * A knowledge commitment vector is a sparse vector of knowledge commitments.
-                 */
-                template<typename Type1, typename Type2>
-                using knowledge_commitment_vector = sparse_vector<knowledge_commitment<Type1, Type2>>;
-
             }    // namespace snark
         }        // namespace zk
     }            // namespace crypto3
 }    // namespace nil
 
-#endif    // KNOWLEDGE_COMMITMENT_HPP
+#endif    // CRYPTO3_R1CS_GG_PPZKSNARK_TYPES_POLICY_HPP
