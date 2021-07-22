@@ -21,7 +21,7 @@ library in a project it is required to:
 
 * [Multiprecision](https://github.com/nilfoundation/crypto3-multiprecision.git)
 * [Algebra](https://github.com/nilfoundation/crypto3-algebra.git)
-* [FFT](https://github.com/nilfoundation/crypto3-fft.git)
+* [FFT](https://github.com/nilfoundation/crypto3-math.git)
 
 ### External
 

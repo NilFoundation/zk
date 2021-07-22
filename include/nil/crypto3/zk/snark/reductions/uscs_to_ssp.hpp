@@ -48,9 +48,9 @@
 #ifndef CRYPTO3_ZK_USCS_TO_SSP_REDUCTION_HPP
 #define CRYPTO3_ZK_USCS_TO_SSP_REDUCTION_HPP
 
-#include <nil/crypto3/fft/coset.hpp>
-#include <nil/crypto3/fft/domains/evaluation_domain.hpp>
-#include <nil/crypto3/fft/make_evaluation_domain.hpp>
+#include <nil/crypto3/math/coset.hpp>
+#include <nil/crypto3/math/domains/evaluation_domain.hpp>
+#include <nil/crypto3/math/evaluation_domain.hpp>
 
 #include <nil/crypto3/zk/snark/relations/arithmetic_programs/ssp.hpp>
 #include <nil/crypto3/zk/snark/relations/constraint_satisfaction_problems/uscs.hpp>
@@ -76,7 +76,7 @@ namespace nil {
                          */
                         static ssp_instance<FieldType> instance_map(const uscs_constraint_system<FieldType> &cs) {
                             const std::shared_ptr<evaluation_domain<FieldType>> domain =
-                                fft::make_evaluation_domain<FieldType>(cs.num_constraints());
+                                math::make_evaluation_domain<FieldType>(cs.num_constraints());
                             std::vector<std::map<std::size_t, typename FieldType::value_type>> V_in_Lagrange_basis(cs.num_variables() + 1);
                             for (std::size_t i = 0; i < cs.num_constraints(); ++i) {
                                 for (std::size_t j = 0; j < cs.constraints[i].terms.size(); ++j) {
@@ -109,7 +109,7 @@ namespace nil {
                             instance_map_with_evaluation(const uscs_constraint_system<FieldType> &cs,
                                                          const typename FieldType::value_type &t) {
                             const std::shared_ptr<evaluation_domain<FieldType>> domain =
-                                fft::make_evaluation_domain<FieldType>(cs.num_constraints());
+                                math::make_evaluation_domain<FieldType>(cs.num_constraints());
 
                             std::vector<typename FieldType::value_type> Vt(cs.num_variables() + 1,
                                                                            FieldType::value_type::zero());
@@ -194,7 +194,7 @@ namespace nil {
                                 aA[i] += FieldType::value_type::one();
                             }
 
-                            domain->iFFT(aA);
+                            domain->inverse_fft(aA);
 
                             std::vector<typename FieldType::value_type> coefficients_for_H(
                                 domain->m + 1, FieldType::value_type::zero());
@@ -205,12 +205,12 @@ namespace nil {
                             for (std::size_t i = 0; i < domain->m; ++i) {
                                 coefficients_for_H[i] = typename FieldType::value_type(2) * d * aA[i];
                             }
-                            domain->add_poly_Z(d.squared(), coefficients_for_H);
+                            domain->add_poly_z(d.squared(), coefficients_for_H);
 
-                            fft::multiply_by_coset(aA,
+                            math::multiply_by_coset(aA,
                                                    typename FieldType::value_type(
                                                        fields::arithmetic_params<FieldType>::multiplicative_generator));
-                            domain->FFT(aA);
+                            domain->fft(aA);
 
                             std::vector<typename FieldType::value_type> &H_tmp =
                                 aA;    // can overwrite aA because it is not used later
@@ -221,9 +221,9 @@ namespace nil {
                                 H_tmp[i] = aA[i].squared() - FieldType::value_type::one();
                             }
 
-                            domain->divide_by_Z_on_coset(H_tmp);
+                            domain->divide_by_z_on_coset(H_tmp);
 
-                            domain->iFFT(H_tmp);
+                            domain->inverse_fft(H_tmp);
                             multiply_by_coset(H_tmp, typename FieldType::value_type(fields::arithmetic_params<FieldType>::multiplicative_generator).inversed());
 
 #ifdef MULTICORE

@@ -232,9 +232,9 @@ namespace prover_helpers {
         key->permutation_selectors_lagrange_base.insert({"sigma_2", std::move(sigma_2_lagrange_base)});
         key->permutation_selectors_lagrange_base.insert({"sigma_3", std::move(sigma_3_lagrange_base)});
 
-        sigma_1.ifft(key->small_domain);
-        sigma_2.ifft(key->small_domain);
-        sigma_3.ifft(key->small_domain);
+        sigma_1.inverse_fft(key->small_domain);
+        sigma_2.inverse_fft(key->small_domain);
+        sigma_3.inverse_fft(key->small_domain);
         constexpr size_t width = 4;
         polynomial sigma_1_fft(sigma_1, key->n * width);
         polynomial sigma_2_fft(sigma_2, key->n * width);
@@ -270,11 +270,11 @@ namespace prover_helpers {
         witness->wires.insert({"w_2", std::move(w_r)});
         witness->wires.insert({"w_3", std::move(w_o)});
 
-        q_l.ifft(key->small_domain);
-        q_r.ifft(key->small_domain);
-        q_o.ifft(key->small_domain);
-        q_m.ifft(key->small_domain);
-        q_c.ifft(key->small_domain);
+        q_l.inverse_fft(key->small_domain);
+        q_r.inverse_fft(key->small_domain);
+        q_o.inverse_fft(key->small_domain);
+        q_m.inverse_fft(key->small_domain);
+        q_c.inverse_fft(key->small_domain);
 
         polynomial q_1_fft(q_l, n * 2);
         polynomial q_2_fft(q_r, n * 2);
